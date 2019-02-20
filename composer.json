@@ -1,0 +1,22 @@
+{
+    "name": "interface/interface",
+    "description": "这是常用接口封装",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "duronghua",
+            "email": "1904563666@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "factory\\":"src/factory",
+            "interfaces\\":"src/interfaces",
+            "service\\":"src/service",
+            "util\\":"src/util"
+        }
+    }
+}
