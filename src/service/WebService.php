@@ -5,9 +5,16 @@
  * Time: 23:03
  */
 namespace service;
-class SaeService
+class WebService
 {
     protected $obj;
+    protected $power=array(
+        'autoloading'=>array('factory\WxFactory'),
+        'function'=>array(
+            'comOAuth'=>array('factory\SaeFactory','factory\WxFactory')
+        ),
+        'notoken'=>array('comUrl','comOAuth','windows')
+    );
     function __construct($class)
     {
         $this->obj=$class;
@@ -16,12 +23,13 @@ class SaeService
     function __call($name, $arguments)
     {
         // TODO: Implement __call() method.
-        if($name=='comUrl'||$name=='comOAuth'){
+        $classname=get_class($this->obj);
+        if(in_array($name, $this->power['notoken'])){
             if($this->obj->token){
                 return ['status'=>10004,'code'=>'repeat_login'];
             }
             if($name=='comOAuth'){
-                if (!isset($_REQUEST['code'])) {
+                if (in_array($classname, $this->power['function'][$name])&&!isset($_REQUEST['code'])) {
                     return ['status'=>10004,'code'=>'illegal_url'];
                 }
             }
@@ -33,9 +41,11 @@ class SaeService
                 return ['status'=>10004,'code'=>'login_error'];
             }
         }
-        $res = $this->obj->objectClass();
-        if ($res['status'] == 10004) {
-            return $res;
+        if(!in_array($classname, $this->power['autoloading'])) {
+            $res = $this->obj->objectClass();
+            if ($res['status'] == 10004) {
+                return $res;
+            }
         }
         return $this->obj->$name();
     }

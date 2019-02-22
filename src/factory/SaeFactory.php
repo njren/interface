@@ -6,9 +6,9 @@
  */
 namespace factory;
 use interfaces\OAuth;
-use util\SaeTOAuthV2;
-use util\SaeTClientV2;
-use util\OAuthException;
+use util\sae\TOAuthV2;
+use util\sae\TClientV2;
+use util\sae\OAuthException;
 class SaeFactory implements OAuth
 {
     public $token=null;
@@ -26,9 +26,9 @@ class SaeFactory implements OAuth
 
     public function objectClass(){
         if($this->token) {
-            $this->object = new SaeTClientV2($this->wb_akey, $this->wb_skey, $this->token['access_token']);
+            $this->object = new TClientV2($this->wb_akey, $this->wb_skey, $this->token['access_token']);
         }else {
-            $this->object = new SaeTOAuthV2($this->wb_akey, $this->wb_skey);
+            $this->object = new TOAuthV2($this->wb_akey, $this->wb_skey);
         }
     }
 

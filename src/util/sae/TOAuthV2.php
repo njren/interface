@@ -4,7 +4,7 @@
  * 
  * @author Elmer Zhang <freeboy6716@gmail.com>
  */
-namespace util;
+namespace util\sae;
 use Exception;
 /**
  * If the class OAuthException has not been declared, extend the Exception class.
@@ -30,7 +30,7 @@ class OAuthException extends Exception {
  * @author Elmer Zhang
  * @version 1.0
  */
-class SaeTOAuthV2 {
+class TOAuthV2 {
 	/**
 	 * @ignore
 	 */
@@ -491,7 +491,7 @@ class SaeTOAuthV2 {
  * @author Easy Chen, Elmer Zhang,Lazypeople
  * @version 1.0
  */
-class SaeTClientV2
+class TClientV2
 {
 	/**
 	 * 构造函数
@@ -505,7 +505,7 @@ class SaeTClientV2
 	 */
 	function __construct( $akey, $skey, $access_token, $refresh_token = NULL)
 	{
-		$this->oauth = new SaeTOAuthV2( $akey, $skey, $access_token, $refresh_token );
+		$this->oauth = new TOAuthV2( $akey, $skey, $access_token, $refresh_token );
 	}
 
 	/**
